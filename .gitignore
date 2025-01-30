@@ -1,0 +1,47 @@
+# Ignore Python bytecode and cache
+__pycache__/
+*.py[cod]
+*.so
+*.pyo
+
+# Ignore environment variables and virtual environments
+.env
+*.env
+venv/
+env/
+ENV/
+*.venv
+
+# Ignore Django migration files (optional, if you don’t want to track them)
+**/migrations/**
+
+# Ignore compiled files
+*.pyc
+*.pyd
+*.pyo
+
+# Ignore logs
+*.log
+logs/
+debug.log
+
+# Ignore media/uploads (if any)
+media/
+uploads/
+
+# Ignore static files (collected)
+staticfiles/
+static/
+
+# Ignore node_modules (if using npm for frontend dependencies)
+node_modules/
+
+# Ignore VS Code and JetBrains settings
+.vscode/
+.idea/
+
+# Ignore macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled assets (if any)
