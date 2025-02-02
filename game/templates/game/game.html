@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevChallenge</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #logo {
+            max-width: 150px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .input-box {
+            padding: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            border: 2px solid black;
+            transition: border 0.3s ease;
+        }
+
+        .correct {
+            border-color: green;
+        }
+
+        .incorrect {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Programming Language</h1>
+
+    <img src="{% static logo_url %}" alt="Icon" id="logo">
+
+    <form id="game-form" hx-post="{% url 'check_answer' %}" hx-swap="outerHTML" hx-target="#response">
+        {% csrf_token %}
+        <input type="text" name="answer" id="answer" class="input-box" autocomplete="off" required>
+        <input type="hidden" name="logo_name" value="{{ logo_name}}">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById("answer").focus(); // Focus on the input box
+        
+        document.addEventListener("htmx:afterSwap", function(event) {
+            let response = event.detail.target;
+            if (response.dataset.status === 'correct') {
+                document.getElementById("answer").classList.add("correct");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else if (response.dataset.status === 'incorrect') {
+                document.getElementById("answer").classList.add("incorrect");
+                setTimeout(() => {
+                    document.getElementById("answer").classList.remove("incorrect");
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
