@@ -31,8 +31,6 @@ uploads/
 
 # Ignore static files (collected)
 staticfiles/
-static/
-
 # Ignore node_modules (if using npm for frontend dependencies)
 node_modules/
 
