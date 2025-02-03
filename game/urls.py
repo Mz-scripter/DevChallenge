@@ -6,7 +6,8 @@ urlpatterns = [
 ]
 
 htmx_urlpatterns = [
-    path('check-answer/', views.check_answer, name='check_answer')
+    path('check-answer/', views.check_answer, name='check_answer'),
+    path('logo-partial/', views.logo_partial, name='logo_partial'),
 ]
 
 urlpatterns += htmx_urlpatterns
