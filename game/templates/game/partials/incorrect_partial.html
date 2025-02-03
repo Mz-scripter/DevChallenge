@@ -1,0 +1,4 @@
+<div id="incorrect-feedback">
+    <p>Incorrect! The correct answer was: <strong>{{ correct_answer }}</strong></p>
+    <button hx-get="{% url 'logo_partial' %}" hx-trigger="every 1s" hx-target="#logo-container" hx-swap="innerHTML">Continue</button>
+</div>

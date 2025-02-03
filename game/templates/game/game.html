@@ -29,45 +29,69 @@
         }
 
         .correct {
-            border-color: green;
+            background-color: lightgreen;
         }
 
         .incorrect {
-            border-color: red;
+            background-color: lightcoral;
         }
     </style>
 </head>
 <body>
-    <h1>Guess the Programming Language</h1>
+   <h1>Guess the Programmming Language</h1>
 
-    <img src="{% static logo_url %}" alt="Icon" id="logo">
+   
 
-    <form id="game-form" hx-post="{% url 'check_answer' %}" hx-swap="outerHTML" hx-target="#response">
+   <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML">
         {% csrf_token %}
+        <div id="logo-container" hx-get="{% url 'logo_partial' %}" hx-trigger="load">
+            {% include 'game/partials/logo_partial.html' %}
+        </div>
         <input type="text" name="answer" id="answer" class="input-box" autocomplete="off" required>
-        <input type="hidden" name="logo_name" value="{{ logo_name}}">
-        <button type="submit">Submit</button>
-    </form>
-
-    <div id="response"></div>
-
-    <script>
-        document.getElementById("answer").focus(); // Focus on the input box
         
+        <button type="submit" onclick="jsclick();">Submit</button>
+   </form>
+
+   <script>
+        document.getElementById("answer").focus();
+
         document.addEventListener("htmx:afterSwap", function(event) {
-            let response = event.detail.target;
-            if (response.dataset.status === 'correct') {
-                document.getElementById("answer").classList.add("correct");
+            const form = document.getElementById("game-form");
+            const input = document.getElementById("answer");
+
+            if (event.detail.target.id === "logo-container") {
+                const status = '';
+                if (status === "correct") {
+                    input.classList.add("correct");
+                } else if (status === "incorrect") {
+                    input.classList.add("incorrect");
+                }
+
                 setTimeout(() => {
-                    window.location.reload();
+                    input.value = "";
+                    input.classList.remove("correct", "incorrect");
+                    input.focus();
                 }, 1000);
-            } else if (response.dataset.status === 'incorrect') {
-                document.getElementById("answer").classList.add("incorrect");
-                setTimeout(() => {
-                    document.getElementById("answer").classList.remove("incorrect");
-                }, 1000);
+                
             }
         });
-    </script>
+
+        function jsclick() {
+            const user = document.getElementById("answer").value;
+            const logo = document.getElementById("logo_name").value;
+            const input = document.getElementById("answer");
+
+            if (user === logo) {
+                input.classList.add("correct");
+            } else {
+                input.classList.add("incorrect");
+            }
+            setTimeout(() => {
+                    input.value = "";
+                    input.classList.remove("correct", "incorrect");
+                    input.focus();
+                }, 1000);
+        }
+   </script>
 </body>
 </html>
