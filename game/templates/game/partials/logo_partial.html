@@ -1,4 +1,11 @@
 {% load static %}
 
+<div>
+    <h2>Score: <span id="score">{{ score }}</span></h2>
+    <h2>Streak: <span id="streak">{{ streak }}</span></h2>
+</div>
+
 <img src="{% static logo_url %}" alt="Icon" id="logo">
 <input type="hidden" name="logo_name" value="{{ logo_name }}" id="logo_name">
+<input type="hidden" name="score" value="{{ score }}" id="player_score">
+<input type="hidden" name="streak" value="{{ streak }}" id="player_streak">

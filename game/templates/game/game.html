@@ -80,11 +80,17 @@
             const user = document.getElementById("answer").value;
             const logo = document.getElementById("logo_name").value;
             const input = document.getElementById("answer");
+            const pScore = document.getElementById("player_score").value;
+            const pStreak = document.getElementById("player_streak").value;
 
             if (user === logo) {
                 input.classList.add("correct");
+                document.getElementById("score").innerText = pScore;
+                document.getElementById("streak").innerText = pStreak;
             } else {
                 input.classList.add("incorrect");
+                document.getElementById("streak").innerText = pStreak;
+                document.getElementById("score").innerText = pScore;
             }
             setTimeout(() => {
                     input.value = "";
