@@ -38,6 +38,10 @@
     </style>
 </head>
 <body>
+    <div id="timer">Time Left: <span id="time-left">60</span>s</div>
+
+    <div id="game-result"></div>
+
    <h1>Guess the Programmming Language</h1>
 
    
@@ -54,27 +58,6 @@
 
    <script>
         document.getElementById("answer").focus();
-
-        document.addEventListener("htmx:afterSwap", function(event) {
-            const form = document.getElementById("game-form");
-            const input = document.getElementById("answer");
-
-            if (event.detail.target.id === "logo-container") {
-                const status = '';
-                if (status === "correct") {
-                    input.classList.add("correct");
-                } else if (status === "incorrect") {
-                    input.classList.add("incorrect");
-                }
-
-                setTimeout(() => {
-                    input.value = "";
-                    input.classList.remove("correct", "incorrect");
-                    input.focus();
-                }, 1000);
-                
-            }
-        });
 
         function jsclick() {
             const user = document.getElementById("answer").value;
@@ -96,7 +79,32 @@
                     input.value = "";
                     input.classList.remove("correct", "incorrect");
                     input.focus();
-                }, 1000);
+                }, 200);
+        }
+
+        let timeLeft = 60;
+        let timeInterval = setInterval(updateTimer, 1000);
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("time-left").textContent = timeLeft;
+            } else {
+                clearInterval(timeInterval);
+                endGame();
+            }
+        }
+
+        function endGame() {
+            fetch("{% url 'game_result' %}")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("game-result").innerHTML = html;
+                })
+            
+                const input = document.getElementById("answer");
+                input.disabled = true;
+                document.getElementById("game-form").style.display = "none";
         }
    </script>
 </body>
