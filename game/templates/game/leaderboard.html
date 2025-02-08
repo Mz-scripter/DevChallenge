@@ -1,0 +1,20 @@
+<h2>🏆 Leaderboard 🏆</h2>
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Score</th>
+        <th>Max Streak</th>
+        <th>Total Score</th>
+    </tr>
+
+    {% for player in players %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ player.username }}</td>
+            <td>{{ player.score }}</td>
+            <td>{{ player.max_streak }}</td>
+            <td>{{ player.total_score }}</td>
+        </tr>
+    {% endfor %}
+</table>
