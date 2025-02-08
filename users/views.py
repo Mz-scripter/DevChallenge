@@ -7,10 +7,13 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print("Form is valid")
             user = form.save()
             login(request, user)
-            return redirect('home')
+            username = form.cleaned_data.get('username')
+            if username:
+                request.session['username'] = username
+                print(request.session['username'])
+            return redirect('game')
         else:
             print("Form errors:", form.errors)
             

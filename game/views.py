@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import os
 import random
 from DevChallenge.settings import BASE_DIR
+from .models import Leaderboard
 
 ICONS_FOLDER = os.path.join(BASE_DIR, "static/icons")
 
@@ -76,10 +77,22 @@ def check_answer(request):
     return JsonResponse({"status": "error"})
 
 def game_result_view(request):
+    username = request.session.get("username", "Guest")
     score = request.session.get("score", 0)
     streak = request.session.get("streak", 0)
+    max_streak = request.session.get("max_streak", 0)
+    
+    leaderboard_entry, created = Leaderboard.objects.get_or_create(username=username)
+    leaderboard_entry.score = max(leaderboard_entry.score, score)
+    leaderboard_entry.max_streak = max(leaderboard_entry.max_streak, max_streak)
+    leaderboard_entry.save()
+    
     context = {
         "score": score,
-        "max_streak": request.session['max_streak']
+        "max_streak": max_streak
     }
     return render(request, 'game/partials/game_result_partial.html', context)
+
+def leaderboard_view(request):
+    top_players = Leaderboard.objects.order_by('-total_score')[:10]
+    return render(request, 'game/leaderboard.html', {"players": top_players})
