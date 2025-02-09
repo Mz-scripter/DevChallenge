@@ -1,33 +1,49 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import SignUpForm
+from django.contrib.auth.models import User
+import requests
 
-def signup_view(request):
+def generate_username():
+    max_attempts = 5
+    attempt = 0
+    
+    while attempt < max_attempts:
+        try:
+            response = requests.get("https://usernameapiv1.vercel.app/api/random-usernames")
+            if response.status_code == 200:
+                username = response.json().get("usernames")[0]
+                
+                if not User.objects.filter(username=username).exists():
+                    return username
+
+                username += str(attempt)
+                if not User.objects.filter(username=username).exists():
+                    return username
+        except Exception as e:
+            print(f"API Error: {e}")
+        
+        attempt += 1
+    
+    return f"User_{User.objects.count() + 1}"
+
+def auth_view(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+        
+        if not username or not password:
+            return render(request, "users/auth.html", {"error": "Username and password are required."})
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user:
             login(request, user)
-            username = form.cleaned_data.get('username')
-            if username:
-                request.session['username'] = username
-                print(request.session['username'])
-            return redirect('game')
         else:
-            print("Form errors:", form.errors)
-            
-    else:
-        form = SignUpForm()
-    return render(request, "users/signup.html", {'form': form})
-
-def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+            user = User.objects.create_user(username=username, password=password)
             login(request, user)
-            return redirect('home')
-    else:
-        form = AuthenticationForm()
-    return render(request, "users/login.html", {'form': form})
+        
+        request.session["username"] = username
+        
+        return redirect('game')
+    return render(request, "users/auth.html")
