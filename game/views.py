@@ -4,6 +4,7 @@ import os
 import random
 from DevChallenge.settings import BASE_DIR
 from .models import Leaderboard
+from users.views import generate_username
 
 ICONS_FOLDER = os.path.join(BASE_DIR, "static/icons")
 
@@ -77,19 +78,32 @@ def check_answer(request):
     return JsonResponse({"status": "error"})
 
 def game_result_view(request):
-    username = request.session.get("username", "Guest")
+    username = request.session.get("username")
+    if not username:
+        username = generate_username()
+        request.session["username"] = username
     score = request.session.get("score", 0)
     streak = request.session.get("streak", 0)
     max_streak = request.session.get("max_streak", 0)
     
+    total_score = score + (max_streak * 2)
+    
     leaderboard_entry, created = Leaderboard.objects.get_or_create(username=username)
-    leaderboard_entry.score = max(leaderboard_entry.score, score)
-    leaderboard_entry.max_streak = max(leaderboard_entry.max_streak, max_streak)
-    leaderboard_entry.save()
+    
+    if total_score > leaderboard_entry.total_score:   
+        leaderboard_entry.score = score
+        leaderboard_entry.max_streak = max_streak
+        leaderboard_entry.total_score = total_score
+        leaderboard_entry.save()
+    
+    rank = Leaderboard.objects.filter(total_score__gt=total_score).count() + 1
     
     context = {
+        "username": username,
         "score": score,
-        "max_streak": max_streak
+        "max_streak": max_streak,
+        "total_score": total_score,
+        "rank": rank
     }
     return render(request, 'game/partials/game_result_partial.html', context)
 

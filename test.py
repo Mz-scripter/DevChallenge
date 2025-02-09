@@ -1,13 +1,15 @@
-import os
-import random
-from DevChallenge.settings import BASE_DIR
+import requests
 
-ICONS_FOLDER = os.path.join(BASE_DIR, "static/icons")
-
-def get_random_icon():
-    icons = [f for f in os.listdir(ICONS_FOLDER) if f.endswith(".svg")]
-    if icons:
-        return random.choice(icons)
+def fetch_random_username():
+    try:
+        response = requests.get("https://usernameapiv1.vercel.app/api/random-usernames")
+        if response.status_code == 200:
+            return response.json().get("usernames")[0]
+    except Exception as e:
+        print(f"API error: {e}")
+    
     return None
 
-print(get_random_icon()) # Output: None
+
+username = fetch_random_username()
+print(username)
