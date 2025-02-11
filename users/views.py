@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 import requests
+from django.http.response import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
 
 def generate_username():
     max_attempts = 5
@@ -47,3 +49,10 @@ def auth_view(request):
         
         return redirect('game')
     return render(request, "users/auth.html")
+
+def check_username(request):
+    username = request.POST.get('username')
+    if get_user_model().objects.filter(username=username).exists():
+        return HttpResponse("<div style='color: red;'>That username is taken, guessing you're tryna login</div>")
+    else:
+        return HttpResponse("<div style='color: green;'>Good choice of username. Now type a good password.</div>")

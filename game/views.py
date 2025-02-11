@@ -88,13 +88,12 @@ def game_result_view(request):
     
     total_score = score + (max_streak * 2)
     
-    leaderboard_entry, created = Leaderboard.objects.get_or_create(username=username)
-    
-    if total_score > leaderboard_entry.total_score:   
-        leaderboard_entry.score = score
-        leaderboard_entry.max_streak = max_streak
-        leaderboard_entry.total_score = total_score
-        leaderboard_entry.save()
+    Leaderboard.objects.create(
+        username=username,
+        score=score,
+        max_streak=max_streak,
+        total_score=total_score
+    )
     
     rank = Leaderboard.objects.filter(total_score__gt=total_score).count() + 1
     
@@ -108,5 +107,5 @@ def game_result_view(request):
     return render(request, 'game/partials/game_result_partial.html', context)
 
 def leaderboard_view(request):
-    top_players = Leaderboard.objects.order_by('-total_score')[:10]
+    top_players = Leaderboard.objects.order_by('-total_score', '-score', '-max_streak')
     return render(request, 'game/leaderboard.html', {"players": top_players})
