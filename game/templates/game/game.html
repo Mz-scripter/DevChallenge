@@ -35,9 +35,13 @@
         .incorrect {
             background-color: lightcoral;
         }
+
+        #game-content {
+            display: block;
+        }
     </style>
 </head>
-<body>
+<body hx-get="{% url 'check-auth-status' %}" hx-trigger="load" hx-target="#auth-overlay" hx-swap="innerHTML">
 
     <div id="auth-overlay"></div>
 
@@ -46,9 +50,10 @@
 
         <div id="game-result"></div>
 
-        <h1>Guess the Programmming Language</h1>
+        
 
         <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML">
+            <h1>Guess the Programmming Language</h1>
             {% csrf_token %}
             <div id="logo-container" hx-get="{% url 'logo_partial' %}" hx-trigger="load">
                 {% include 'game/partials/logo_partial.html' %}
