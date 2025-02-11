@@ -56,3 +56,14 @@ def check_username(request):
         return HttpResponse("<div style='color: red;'>That username is taken, guessing you're tryna login</div>")
     else:
         return HttpResponse("<div style='color: green;'>Good choice of username. Now type a good password.</div>")
+    
+def check_auth_status(request):
+    if request.session.get("username"):
+        pass
+    else:
+        return render(request, "users/partials/auth_partial.html")
+
+def play_as_guest(request):
+    username = generate_username()
+    request.session['username'] = username
+    return redirect('game')
