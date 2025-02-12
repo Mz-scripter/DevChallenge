@@ -10,6 +10,7 @@ htmx_urlpatterns = [
     path('check-answer/', views.check_answer, name='check_answer'),
     path('logo-partial/', views.logo_partial, name='logo_partial'),
     path('game-result/', views.game_result_view, name='game_result'),
+    path('countdown/', views.countdown, name='countdown')
 ]
 
 urlpatterns += htmx_urlpatterns

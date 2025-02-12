@@ -1,0 +1,27 @@
+#countdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0f1e, #1e495d, #1e6d7a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#countdown-text {
+    animation: scaleUp 1s infinite;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
