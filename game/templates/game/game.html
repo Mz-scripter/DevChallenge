@@ -13,15 +13,17 @@
 
     <div id="auth-overlay" class="wrapper"></div>
 
-    <div id="game-content">
-        <div id="timer">Time Left: <span id="time-left">60</span>s</div>
+    <!-- Countdown Overlay -->
+    <div id="countdown-overlay">
+        <h1 id="countdown-text">3</h1>
+    </div>
 
+    <div id="game-content" style="display: none;">  <!-- Hidden until countdown ends -->
+        <div id="timer">Time Left: <span id="time-left">60</span>s</div>
         <div id="game-result"></div>
 
-        
-
         <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML" onsubmit="jsclick();">
-            <h1>Guess the Programmming Language</h1>
+            <h1>Guess the Programming Language</h1>
             {% csrf_token %}
             <div id="logo-container" hx-get="{% url 'logo_partial' %}" hx-trigger="load">
                 {% include 'game/partials/logo_partial.html' %}
@@ -29,7 +31,6 @@
             <input type="text" name="answer" id="answer" class="input-box" autocomplete="off" required>
         </form>
     </div>
-    
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>

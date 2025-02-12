@@ -1,4 +1,28 @@
+document.addEventListener("DOMContentLoaded", function () {
+    let countdownOverlay = document.getElementById("countdown-overlay");
+    let countdownText = document.getElementById("countdown-text");
+    let gameContent = document.getElementById("game-content");
+    let answerInput = document.getElementById("answer");
 
+    let countdown = 3;
+    let countdownInterval = setInterval(() => {
+        if (countdown > 1) {
+            countdown--;
+            countdownText.textContent = countdown;
+        } else {
+            countdownText.textContent = "Go!";
+            clearInterval(countdownInterval);
+            setTimeout(() => {
+                countdownOverlay.style.opacity = "0";
+                setTimeout(() => {
+                    countdownOverlay.style.display = "none";
+                    gameContent.style.display = "block";  // Show game content
+                    answerInput.focus(); // Focus input after countdown
+                }, 500);
+            }, 1000);
+        }
+    }, 1000);
+});
 
 function jsclick() {
     const user = document.getElementById("answer").value;
@@ -23,18 +47,25 @@ function jsclick() {
         }, 200);
 }
 
-let timeLeft = 60;
-let timeInterval = setInterval(updateTimer, 1000);
+let gameTimeLeft = 60;  // Initial time in seconds
 
-function updateTimer() {
-    if (timeLeft > 0) {
-        timeLeft--;
-        document.getElementById("time-left").textContent = timeLeft;
-    } else {
-        clearInterval(timeInterval);
-        endGame();
-    }
+function startGameTimer() {
+    let timerElement = document.getElementById("time-left");
+
+    let gameTimer = setInterval(() => {
+        if (gameTimeLeft > 0) {
+            gameTimeLeft--;
+            timerElement.textContent = gameTimeLeft;
+        } else {
+            clearInterval(gameTimer);
+            alert("Time's up!");
+        }
+    }, 1000);
 }
+
+// Call startGameTimer() after countdown finishes
+setTimeout(startGameTimer, 4000);  // Starts after countdown (3s + 1s "Go!")
+
 
 function endGame() {
     fetch("game-result/")

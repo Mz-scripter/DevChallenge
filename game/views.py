@@ -109,3 +109,6 @@ def game_result_view(request):
 def leaderboard_view(request):
     top_players = Leaderboard.objects.order_by('-total_score', '-score', '-max_streak')
     return render(request, 'game/leaderboard.html', {"players": top_players})
+
+def countdown(request):
+    return render(request, 'game/partials/countdown.html')
