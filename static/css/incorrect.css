@@ -1,0 +1,33 @@
+#incorrect-feedback {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+#answer {
+    visibility: hidden;
+}
+
+.incorrect-text {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.continue-text {
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: cyan;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.continue-text:hover {
+    color: lightgreen;
+}

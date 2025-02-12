@@ -20,15 +20,13 @@
 
         
 
-        <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML">
+        <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML" onsubmit="jsclick();">
             <h1>Guess the Programmming Language</h1>
             {% csrf_token %}
             <div id="logo-container" hx-get="{% url 'logo_partial' %}" hx-trigger="load">
                 {% include 'game/partials/logo_partial.html' %}
             </div>
             <input type="text" name="answer" id="answer" class="input-box" autocomplete="off" required>
-            
-            <button type="submit" onclick="jsclick();">Submit</button>
         </form>
     </div>
     

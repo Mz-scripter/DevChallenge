@@ -1,4 +1,4 @@
-document.getElementById("answer").focus();
+
 
 function jsclick() {
     const user = document.getElementById("answer").value;
