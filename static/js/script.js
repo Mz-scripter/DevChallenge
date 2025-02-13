@@ -4,25 +4,30 @@ document.addEventListener("DOMContentLoaded", function () {
     let gameContent = document.getElementById("game-content");
     let answerInput = document.getElementById("answer");
 
-    let countdown = 3;
-    let countdownInterval = setInterval(() => {
-        if (countdown > 1) {
-            countdown--;
-            countdownText.textContent = countdown;
-        } else {
-            countdownText.textContent = "Go!";
-            clearInterval(countdownInterval);
-            setTimeout(() => {
-                countdownOverlay.style.opacity = "0";
+    // Define startCountdown globally so HTMX can access it
+    window.startCountdown = function () {
+        countdownOverlay.style.display = "flex";
+        let countdown = 3;
+        let countdownInterval = setInterval(() => {
+            if (countdown > 1) {
+                countdown--;
+                countdownText.textContent = countdown;
+            } else {
+                countdownText.textContent = "Go!";
+                clearInterval(countdownInterval);
                 setTimeout(() => {
-                    countdownOverlay.style.display = "none";
-                    gameContent.style.display = "block";  // Show game content
-                    answerInput.focus(); // Focus input after countdown
-                }, 500);
-            }, 1000);
-        }
-    }, 1000);
+                    countdownOverlay.style.opacity = "0";
+                    setTimeout(() => {
+                        countdownOverlay.style.display = "none";
+                        gameContent.style.display = "block";  
+                        answerInput.focus();
+                    }, 500);
+                }, 1000);
+            }
+        }, 1000);
+    };
 });
+
 
 function jsclick() {
     const user = document.getElementById("answer").value;
@@ -58,7 +63,7 @@ function startGameTimer() {
             timerElement.textContent = gameTimeLeft;
         } else {
             clearInterval(gameTimer);
-            alert("Time's up!");
+            endGame();
         }
     }, 1000);
 }

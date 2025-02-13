@@ -59,7 +59,7 @@ def check_username(request):
     
 def check_auth_status(request):
     if request.session.get("username"):
-        pass
+        return render(request, "users/partials/auth_success_partial.html")  # A hidden element to trigger countdown
     else:
         return render(request, "users/partials/auth_partial.html")
 
