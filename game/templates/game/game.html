@@ -11,14 +11,16 @@
 </head>
 <body hx-get="{% url 'check-auth-status' %}" hx-trigger="load" hx-target="#auth-overlay" hx-swap="innerHTML">
 
+    <!-- Authentication Check -->
     <div id="auth-overlay" class="wrapper"></div>
 
-    <!-- Countdown Overlay -->
-    <div id="countdown-overlay">
+    <!-- Countdown (Hidden Initially) -->
+    <div id="countdown-overlay" style="display: none;">
         <h1 id="countdown-text">3</h1>
     </div>
 
-    <div id="game-content" style="display: none;">  <!-- Hidden until countdown ends -->
+    <!-- Game Content (Hidden Initially) -->
+    <div id="game-content" style="display: none;">
         <div id="timer">Time Left: <span id="time-left">60</span>s</div>
         <div id="game-result"></div>
 
