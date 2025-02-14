@@ -1,10 +1,42 @@
-<div id="game-over">
-    <h2>Game Over!</h2>
-    <p>Username: {{ username }}</p>
-    <p>Your Score: {{ score }}</p>
-    <p>Max Streak: {{ max_streak }}</p>
-    <p>Total Score: {{ total_score }}</p>
-    <p>Rank: {{ rank }}</p>
+{% load static %}
 
-    <button onclick="location.reload()">Play Again</button>
+<link rel="stylesheet" href="{% static 'css/game-result.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <h2>Game Over!</h2>
+            <div class="rank-badge">
+                <span>Rank: {{ rank }}</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-user"></i>
+                <span>{{ username }}</span>
+            </div>
+
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <span>Score: {{ score }}</span>
+            </div>
+
+            <div class="stat-item">
+                <i class="fas fa-fire"></i>
+                <span>Max Streak: {{ max_streak }}</span>
+            </div>
+
+            <div class="stat-item">
+                <i class="fas fa-trophy"></i>
+                <span>Total Score: {{ total_score }}</span>
+            </div>
+        </div>
+
+        <button class="play-again-btn" onclick="window.location.reload()">
+            <i class="fas fa-redo"></i>
+            <span>Play Again</span>
+        </button>
+    </div>
 </div>
