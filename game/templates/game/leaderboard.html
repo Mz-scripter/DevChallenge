@@ -1,20 +1,44 @@
-<h2>🏆 Leaderboard 🏆</h2>
-<table>
-    <tr>
-        <th>Rank</th>
-        <th>Username</th>
-        <th>Score</th>
-        <th>Max Streak</th>
-        <th>Total Score</th>
-    </tr>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+    <title>DevChallenge | 🏆 Leaderboard 🏆</title>
 
-    {% for player in players %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ player.username }}</td>
-            <td>{{ player.score }}</td>
-            <td>{{ player.max_streak }}</td>
-            <td>{{ player.total_score }}</td>
-        </tr>
-    {% endfor %}
-</table>
+    <div class="leaderboard">
+        <h2>🏆 Leaderboard 🏆</h2>
+        <div class="leaderboard-grid">
+            <div class="leaderboard-header">
+                <span><i class="fas fa-trophy"></i> Rank</span>
+                <span><i class="fas fa-user"></i> Username</span>
+                <span><i class="fas fa-star"></i> Score</span>
+                <span><i class="fas fa-fire"></i> Max Streak</span>
+                <span><i class="fas fa-chart-line"></i> Total Score</span>
+            </div>
+    
+            {% for player in players %}
+            <div class="leaderboard-row {% if forloop.counter == 1 %}gold{% elif forloop.counter == 2 %}silver{% elif forloop.counter == 3 %}bronze{% endif %}">
+                <span>
+                    {% if forloop.counter == 1 %}
+                        <i class="fas fa-trophy gold-icon"></i>
+                    {% elif forloop.counter == 2 %}
+                        <i class="fas fa-trophy silver-icon"></i>
+                    {% elif forloop.counter == 3 %}
+                        <i class="fas fa-trophy bronze-icon"></i>
+                    {% else %}
+                        {{ forloop.counter }}
+                    {% endif %}
+                </span>
+                <span>{{ player.username }}</span>
+                <span>{{ player.score }}</span>
+                <span>{{ player.max_streak }}</span>
+                <span>{{ player.total_score }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
