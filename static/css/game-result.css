@@ -19,7 +19,7 @@ body {
 /* Card */
 .card {
     background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     border-radius: 20px;
     border: 1px solid rgba(64, 192, 202, 0.2);
     padding: 20px;
@@ -102,4 +102,23 @@ body {
 
 #timer {
     display: none;
+}
+
+#share-btn,
+#share-x {
+    background-color: #40C0CA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s ease;
+}
+
+#share-btn:hover,
+#share-x {
+    background-color: rgba(64, 192, 202, 0.9);
 }
