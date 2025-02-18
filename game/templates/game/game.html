@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/game.css' %}">
     <title>DevChallenge</title>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body hx-get="{% url 'check-auth-status' %}" hx-trigger="load" hx-target="#auth-overlay" hx-swap="innerHTML">
 
@@ -22,7 +23,7 @@
     <!-- Game Content (Hidden Initially) -->
     <div id="game-content" style="display: none;">
         <div id="timer">Time Left: <span id="time-left">60</span>s</div>
-        <div id="game-result"></div>
+        <div id="game-result" hx-get="{% url 'game_result' %}" hx-trigger="game-over from:body" hx-target="#game-result" hx-swap="innerHTML"></div>
 
         <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML" onsubmit="jsclick();">
             <h1>Guess the Programming Language</h1>
@@ -35,5 +36,6 @@
     </div>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/share-stats.js' %}"></script>
 </body>
 </html>

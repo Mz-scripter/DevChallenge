@@ -33,6 +33,7 @@
                 <span>Total Score: {{ total_score }}</span>
             </div>
         </div>
+        
 
         
     </div>
@@ -41,12 +42,12 @@
         <span>Play Again</span>
     </button>
 
-    <button id="share-btn" onclick="
+    <button id="share-btn" onclick="shareStats();">Share Stats</button>
+    <button id="share-btn" onclick="shareOnX()">Share on X</button>
+    <button id="share-btn" onclick="snap()">Screenshot</button>
 
-        navigator.share({
-            title: 'DevChallenge Game Stats',
-            text: 'Check out my game stats!'
-        }); 
-    ">Share Stats</button>
 </div>
 
+<input type="hidden" name="score" value="{{ total_score }}" id="score">
+
+<script src="{% static 'js/share-stats.js' %}" defer></script>

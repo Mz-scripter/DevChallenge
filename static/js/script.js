@@ -61,6 +61,10 @@ function startGameTimer() {
         if (gameTimeLeft > 0) {
             gameTimeLeft--;
             timerElement.textContent = gameTimeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                document.body.dispatchEvent(new Event("game-over"));  // 🔥 Trigger HTMX Event
+            }
         } else {
             clearInterval(gameTimer);
             endGame();
@@ -73,11 +77,11 @@ setTimeout(startGameTimer, 4000);  // Starts after countdown (3s + 1s "Go!")
 
 
 function endGame() {
-    fetch("game-result/")
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById("game-result").innerHTML = html;
-        })
+    // fetch("game-result/")
+    //     .then(response => response.text())
+    //     .then(html => {
+    //         document.getElementById("game-result").innerHTML = html;
+    //     })
     
         const input = document.getElementById("answer");
         input.disabled = true;
