@@ -37,17 +37,13 @@
 
         
     </div>
-    <button class="play-again-btn" onclick="window.location.reload()">
+    <button class="play-again-btn exclude-from-screenshot" onclick="window.location.reload()">
         <i class="fas fa-redo"></i>
         <span>Play Again</span>
     </button>
 
-    <button id="share-btn" onclick="shareStats();">Share Stats</button>
-    <button id="share-btn" onclick="shareOnX()">Share on X</button>
-    <button id="share-btn" onclick="snap()">Screenshot</button>
+    <button class="exclude-from-screenshot" id="share-btn" onclick="shareStats();">Share Stats</button>
+    <button class="exclude-from-screenshot" id="share-btn" onclick="shareOnX()">Share on X</button>
+    <button class="exclude-from-screenshot" id="share-btn" onclick="snap()">Screenshot</button>
 
 </div>
-
-<input type="hidden" name="score" value="{{ total_score }}" id="score">
-
-<script src="{% static 'js/share-stats.js' %}" defer></script>
