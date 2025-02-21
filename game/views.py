@@ -89,11 +89,12 @@ def game_result_view(request):
     total_score = score + (max_streak * 2)
     request.session["total_score"] = total_score
     
-    player, created = Leaderboard.objects.get_or_create(username=username, defaults={
-        "score": score,
-        "max_streak": max_streak,
-        "total_score": total_score
-    })
+    if total_score > 0:
+        player, created = Leaderboard.objects.get_or_create(username=username, defaults={
+            "score": score,
+            "max_streak": max_streak,
+            "total_score": total_score
+        })
     
     if not created and total_score > player.total_score:
         player.score = score
@@ -119,3 +120,6 @@ def leaderboard_view(request):
 
 def countdown(request):
     return render(request, 'game/partials/countdown.html')
+
+def rules(request):
+    return render(request, 'game/rules.html')

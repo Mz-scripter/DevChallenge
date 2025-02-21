@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.game_view, name='game'),
     path('leaderboard/', views.leaderboard_view, name='leaderboard'),
+    path('rules/', views.rules, name='rules'),
 ]
 
 htmx_urlpatterns = [

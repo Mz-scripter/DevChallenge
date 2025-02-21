@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Rules - DevChallenge</title>
+    <link rel="stylesheet" href="{% static 'css/rules.css' %}">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="rules-container">
+        <h1>Game Rules 🕹️</h1>
+        <div class="rules-content">
+            <p>Welcome to <strong>DevChallenge</strong>! Here’s how to play:</p>
+            
+            <h2>How to Answer Questions</h2>
+            <ul>
+                <li>🚫 <strong>No spaces</strong> are allowed in your answers.</li>
+                <li>🚫 <strong>No hyphens (-)</strong> are allowed in your answers.</li>
+            </ul>
+
+            <h2>Examples</h2>
+            <div class="example">
+                <div class="example-icon">
+                    <img src="{% static 'icons/dotnetcore-original.svg' %}" alt=".NET Core Icon">
+                </div>
+                <div class="example-text">
+                    <p>For <strong>.NET Core</strong>, type: <code>DOTNETCORE</code></p>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-icon">
+                    <img src="{% static 'icons/csharp-original.svg' %}" alt="C# Icon">
+                </div>
+                <div class="example-text">
+                    <p>For <strong>C#</strong>, type: <code>CSHARP</code></p>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-icon">
+                    <img src="{% static 'icons/cplusplus-original.svg' %}" alt="C++ Icon">
+                </div>
+                <div class="example-text">
+                    <p>For <strong>C++</strong>, type: <code>CPLUSPLUS</code></p>
+                </div>
+            </div>
+
+            <p>Ready to play? Click the button below to start the game!</p>
+            <button class="play-again-btn" onclick="window.location.href='/'">
+                <i class="fas fa-play"></i> Start Playing
+            </button>
+        </div>
+    </div>
+</body>
+</html>

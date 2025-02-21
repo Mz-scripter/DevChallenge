@@ -47,7 +47,7 @@ def auth_view(request):
         
         request.session["username"] = username
         
-        return redirect('game')
+        return redirect('rules')
     return render(request, "users/auth.html")
 
 def check_username(request):
