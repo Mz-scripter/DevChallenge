@@ -8,14 +8,19 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-html,body{
+
+html {
+    padding: 50px;
+}
+
+html, body{
     display: grid;
     height: 100%;
     width: 100%;
     place-items: center;
 
     /* background: #0f0707; */
-    background: linear-gradient(-135deg, #051219, #40C0CA);
+    
 }
 
 body { 
@@ -31,6 +36,11 @@ body {
     background: #40C0CA;
     color: #fff;
 }
+
+.response {
+    font-size: 13px;
+}
+
 .wrapper{
     width: 380px;
     background: #fff;
