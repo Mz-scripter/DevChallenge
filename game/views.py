@@ -89,12 +89,17 @@ def game_result_view(request):
     total_score = score + (max_streak * 2)
     request.session["total_score"] = total_score
     
-    Leaderboard.objects.create(
-        username=username,
-        score=score,
-        max_streak=max_streak,
-        total_score=total_score
-    )
+    player, created = Leaderboard.objects.get_or_create(username=username, defaults={
+        "score": score,
+        "max_streak": max_streak,
+        "total_score": total_score
+    })
+    
+    if not created and total_score > player.total_score:
+        player.score = score
+        player.max_streak = max_streak
+        player.total_score = total_score
+        player.save()
     
     rank = Leaderboard.objects.filter(total_score__gt=total_score).count() + 1
     request.session['rank'] = rank

@@ -52,10 +52,14 @@ def auth_view(request):
 
 def check_username(request):
     username = request.POST.get('username')
+    
+    if len(username) < 3:
+        return HttpResponse("<div style='color: red;' class='response'>C'mon that's too short.</div>")
+    
     if get_user_model().objects.filter(username=username).exists():
-        return HttpResponse("<div style='color: red;'>That username is taken, guessing you're tryna login</div>")
+        return HttpResponse("<div style='color: red;' class='response'>Taken, you want to login?</div>")
     else:
-        return HttpResponse("<div style='color: green;'>Good choice of username. Now type a good password.</div>")
+        return HttpResponse("<div style='color: green;' class='response'>I kinda like it</div>")
     
 def check_auth_status(request):
     if request.session.get("username"):

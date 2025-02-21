@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static 'css/incorrect.css' %}">
 
 <div id="incorrect-feedback">
-    <p class="incorrect-text">Incorrect! The correct answer was: <strong>{{ correct_answer | upper }}</strong></p>
+    <p class="incorrect-text">Answer<strong>{{ correct_answer | upper }}</strong></p>
     <input type="hidden" name="streak" value="{{ streak }}" id="player_streak">
-    <span class="continue-text" hx-get="{% url 'logo_partial' %}" hx-trigger="every 0.6s" hx-target="#logo-container" hx-swap="innerHTML">Click to continue</span>
+    <span class="continue-text" hx-get="{% url 'logo_partial' %}" hx-trigger="every 0.6s" hx-target="#logo-container" hx-swap="innerHTML"></span>
 </div>

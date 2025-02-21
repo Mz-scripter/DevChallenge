@@ -14,20 +14,7 @@
 }
 
 .incorrect-text {
-    font-size: 1rem;
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
-}
-
-.continue-text {
-    display: inline-block;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    color: cyan;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.continue-text:hover {
-    color: lightgreen;
 }
