@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/countdown.css' %}">
     <link rel="stylesheet" href="{% static 'css/game.css' %}">
     <title>DevChallenge</title>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
@@ -26,7 +27,7 @@
 
     <!-- Game Content (Hidden Initially) -->
     <div id="game-content" style="display: none;">
-        <div id="timer">Time Left: <span id="time-left">60</span>s</div>
+        <div id="timer">Time Left:  00:<span id="time-left">60</span>s</div>
         <div id="game-result" hx-get="{% url 'game_result' %}" hx-trigger="game-over from:body" hx-target="#game-result" hx-swap="innerHTML"></div>
 
         <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML" onsubmit="jsclick();">
