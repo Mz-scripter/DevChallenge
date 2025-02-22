@@ -1,5 +1,6 @@
 /* Leaderboard Container */
 .leaderboard {
+    position: relative;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     border-radius: 20px;
@@ -8,6 +9,9 @@
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    height: 80vh;  /* Keep leaderboard height fixed */
+    display: flex;
+    flex-direction: column;
 }
 
 .leaderboard h2 {
@@ -19,20 +23,48 @@
 
 /* Leaderboard Grid */
 .leaderboard-grid {
-    display: grid;
-    gap: 10px;
+    flex-grow: 1;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    max-height: calc(100% - 80px); /* Adjust based on button height */
 }
 
 /* Leaderboard Header */
 .leaderboard-header {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    backdrop-filter: blur(500px);
     gap: 10px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     font-weight: bold;
     color: #40C0CA;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+/* Custom Scrollbar for Leaderboard */
+.leaderboard-grid::-webkit-scrollbar {
+    width: 8px;  /* Adjust width */
+}
+
+/* Scrollbar Track */
+.leaderboard-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+/* Scrollbar Thumb */
+.leaderboard-grid::-webkit-scrollbar-thumb {
+    background: #40C0CA;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+/* Scrollbar Thumb on Hover */
+.leaderboard-grid::-webkit-scrollbar-thumb:hover {
+    background: #32A0B2;
 }
 
 .leaderboard-header i {
@@ -141,10 +173,11 @@
 }
 
 
-
-
-/* Play Again Button */
+/* Play Again Button (Fixed at Top-Left of Leaderboard) */
 .play-again-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     background-color: #40C0CA;
     color: white;
     border: none;
@@ -152,20 +185,73 @@
     font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 10px;
     transition: 0.3s;
 }
 
-.play-again-btn i {
-    margin-right: 5px;
-}
-
+/* Hover Effect */
 .play-again-btn:hover {
     background-color: #32A0B2;
 }
 
-.play-again-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+/* Button Resizing for Smaller Screens */
+body {
+    font-size: 16px;
+}
+
+/* Responsive Font Adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Reduce font size on tablets */
+    }
+    .leaderboard-header, .leaderboard-row span {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px; /* Reduce font size further on small screens */
+    }
+    .leaderboard-header, .leaderboard-row span {
+        font-size: 11px;
+    }
+    .play-again-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+
+/* Footer Styles */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Transparent Blur Effect */
+    backdrop-filter: blur(20px);
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Footer Icons */
+.footer-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-icons a {
+    color: white;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.footer-icons a:hover {
+    color: #40C0CA;
 }
