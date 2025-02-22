@@ -12,6 +12,8 @@ env/
 ENV/
 *.venv
 
+db.sqlite3
+
 # Ignore Django migration files (optional, if you don’t want to track them)
 **/migrations/**
 
