@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-# Exit on error
-set -o errexit
+set -o errexit  # Stop execution on error
 
-pip install -r requirements.txt
+# Ensure Python is correctly set
+export PYTHONUNBUFFERED=1
+export PATH="/usr/local/bin:$PATH"
 
-# Convert static assets files
-python manage.py collectstatic --noinput
+# Install dependencies
+python3 -m ensurepip --default-pip
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+
+# Collect static files
+python3 manage.py collectstatic --noinput
 
 # Apply database migrations
-python manage.py makemigrations
-python manage.py migrate
+python3 manage.py migrate --noinput
 
-python create_superuser.py
+# Create superuser (optional)
+python3 create_superuser.py || echo "Superuser creation skipped."
