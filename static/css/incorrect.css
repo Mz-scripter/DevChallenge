@@ -1,3 +1,4 @@
+/* Center the incorrect feedback */
 #incorrect-feedback {
     text-align: center;
     position: absolute;
@@ -6,15 +7,44 @@
     transform: translate(-50%, -50%);
     padding: 20px;
     border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Add slight background for better visibility */
+    backdrop-filter: blur(10px);
+    width: 90%; /* Make sure it adapts to different screens */
+    max-width: 400px;
     color: white;
 }
 
+/* Make sure input is hidden */
 #answer {
     visibility: hidden;
 }
 
+/* Responsive text size */
 .incorrect-text {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    #incorrect-feedback {
+        width: 80%;
+        padding: 15px;
+    }
+
+    .incorrect-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #incorrect-feedback {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .incorrect-text {
+        font-size: 14px;
+    }
 }
