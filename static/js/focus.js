@@ -1,13 +1,12 @@
-function focusInput() {
+function triggerKeyboard() {
     const input = document.getElementById("answer");
 
     if (input) {
-        input.setAttribute("readonly", "readonly");
-        input.setAttribute("disabled", "true");
         input.focus();
-        input.removeAttribute("readonly");
-        input.removeAttribute("disabled");
+        input.click(); // Simulate user click
     }
 }
 
-setTimeout(focusInput, 100);
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(triggerKeyboard, 200); // Small delay ensures it works
+});
