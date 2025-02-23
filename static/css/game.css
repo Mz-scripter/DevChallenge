@@ -33,8 +33,15 @@
 
 
 body {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
     text-align: center;
-    font-family: Arial, sans-serif;
+    padding: 0 1rem;
     background-size: cover;
     background-position: center center;
     background-repeat: repeat;
@@ -55,8 +62,8 @@ body {
 }
 
 .input-box {
-    font-size: 24px;
-    padding: 15px 20px;
+    font-size: 1rem;
+    padding: 12px;
     border: none;
     border-radius: 50px; /* Makes it more cloud-like */
     background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
@@ -94,8 +101,57 @@ form {
 
 #game-content {
     display: block;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #timer, #game-result {
     color: white;
+}
+
+#timer {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#game-title {
+    font-size: 1.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #timer {
+        font-size: 1rem;
+    }
+
+    .input-box {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #game-content {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    #timer {
+        font-size: 0.9rem;
+    }
+
+    .input-box {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
 }
