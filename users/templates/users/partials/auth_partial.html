@@ -3,25 +3,27 @@
 <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
 <div class="title">
-    Login or Sign Up, Either Works🙃
- </div>
- <form action="{% url 'auth' %}" method="POST">
-    {% csrf_token %}
-    <div class="field">
-        <input type="text" name="username" hx-post="{% url 'check-username' %}" hx-target="#username-error" hx-trigger="keyup" hx-swap="outerhtml" required autocomplete="off">
-       <label>Username</label>
-    </div>
+   Login or Sign Up, Either Works🙃
+</div>
+<form action="{% url 'auth' %}" method="POST">
+   {% csrf_token %}
+   <div class="field">
+         <input type="text" name="username" hx-post="{% url 'check-username' %}" hx-target="#username-error" hx-trigger="keyup" hx-swap="outerhtml" required autocomplete="off">
+      <label>Username</label>
+   </div>
 
-    <div id="username-error"></div>
+   <div id="username-error"></div>
 
-    <div class="field">
-       <input type="password" name="password" required>
-       <label>Password</label>
-    </div>
-    <div class="field">
-       <input type="submit" value="Let's Play">
-    </div>
-    <div class="signup-link">
-       Can't think of a good username <a href="{% url 'play-as-guest' %}">Play as a Guest</a>
-    </div>
- </form>
+   <div class="field">
+      <input type="password" name="password" required>
+      <label>Password</label>
+   </div>
+   <div class="field">
+      <input type="submit" value="Let's Play">
+   </div>
+   <div class="signup-link">
+      Can't think of a good username <a href="{% url 'play-as-guest' %}">Play as a Guest</a>
+   </div>
+</form>
+
+

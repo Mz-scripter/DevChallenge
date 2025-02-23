@@ -130,3 +130,35 @@ form .pass-link a:hover,
 form .signup-link a:hover{
     text-decoration: underline;
 }
+
+/* Ensure content scales properly */
+
+.wrapper {
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+/* Adjust font size and padding for smaller screens */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .wrapper {
+        max-width: 90%;
+    }
+
+    .field input {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .field label {
+        font-size: 0.9rem;
+    }
+
+    .signup-link {
+        font-size: 0.85rem;
+    }
+}
