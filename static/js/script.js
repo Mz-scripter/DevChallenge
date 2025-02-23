@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function jsclick() {
-    const user = document.getElementById("answer").value;
-    const logo = document.getElementById("logo_name").value;
+    const user = document.getElementById("answer").value.trim().toUpperCase();
+    const logo = document.getElementById("logo_name").value.trim().toUpperCase();
     const input = document.getElementById("answer");
     const pScore = document.getElementById("player_score").value;
     const pStreak = document.getElementById("player_streak").value;
@@ -45,6 +45,9 @@ function jsclick() {
         document.getElementById("streak").innerText = pStreak;
         document.getElementById("score").innerText = pScore;
     }
+
+    input.offsetWidth;
+    
     setTimeout(() => {
             input.value = "";
             input.classList.remove("correct", "incorrect");
