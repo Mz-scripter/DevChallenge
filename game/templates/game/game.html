@@ -32,7 +32,7 @@
         
         <form id="game-form" hx-post="{% url 'check_answer' %}" hx-target="#logo-container" hx-swap="innerHTML" onsubmit="jsclick();">
             <h1 id="game-title">Can You Guess the Dev Icon? 🕹️</h1>
-            <div id="timer">Time Left:  00:<span id="time-left">60</span>s</div>
+            
             {% csrf_token %}
             <div id="logo-container" hx-get="{% url 'logo_partial' %}" hx-trigger="load">
                 {% include 'game/partials/logo_partial.html' %}
