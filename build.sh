@@ -6,8 +6,6 @@ export PYTHONUNBUFFERED=1
 export PATH="/usr/local/bin:$PATH"
 
 # Install dependencies
-python3 -m ensurepip --default-pip
-python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 
 # Collect static files
